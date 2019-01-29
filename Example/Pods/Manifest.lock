@@ -1,0 +1,16 @@
+PODS:
+  - FloatingLabelTextField (1.0.0)
+
+DEPENDENCIES:
+  - FloatingLabelTextField (from `../`)
+
+EXTERNAL SOURCES:
+  FloatingLabelTextField:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FloatingLabelTextField: 6c59fa9e085bfa6abddc5e8c3df3c1098fd8b3e3
+
+PODFILE CHECKSUM: 8d80d7feb326ff53df2214826f59699af3ea47f1
+
+COCOAPODS: 1.5.0

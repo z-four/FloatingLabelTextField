@@ -1,0 +1,5 @@
+use_frameworks!
+
+target 'FloatingLabelTextField_Example' do
+  pod 'FloatingLabelTextField', :path => '../'
+end
