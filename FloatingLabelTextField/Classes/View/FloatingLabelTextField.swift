@@ -11,17 +11,17 @@ import UIKit.UITextField
 // MARK: - Lifecycle
 @IBDesignable public class FloatingLabelTextField: UIView {
     
-    @IBInspectable var separatorColor: UIColor? {
+    @IBInspectable public var separatorColor: UIColor? {
         set { separatorView?.backgroundColor = newValue }
         get { return UIColor.separatorColor }
     }
     
-    @IBInspectable var headerColor: UIColor {
+    @IBInspectable public var headerColor: UIColor {
         set { headerLabel?.textColor = newValue }
         get { return UIColor.floatingLabelColor  }
     }
     
-    @IBInspectable var headerText: String?  {
+    @IBInspectable public var headerText: String?  {
         set {
             headerLabel?.setText(text: newValue, color: .floatingLabelColor)
             headerLabel?.letterSpace = -0.2
@@ -29,7 +29,7 @@ import UIKit.UITextField
         get { return headerLabel?.getText() }
     }
     
-    @IBInspectable var placeholderColor: UIColor {
+    @IBInspectable public var placeholderColor: UIColor {
         set {
             if let placeholder = placeholderText {
                 textField?.attributedPlaceholder = NSAttributedString(string: placeholder,
@@ -40,12 +40,12 @@ import UIKit.UITextField
         get { return UIColor.placeholderColor  }
     }
     
-    @IBInspectable var placeholderText: String? {
+    @IBInspectable public var placeholderText: String? {
         set { textField?.placeholder = newValue }
         get { return textField?.placeholder }
     }
     
-    @IBInspectable var isSecure: Bool = true
+    @IBInspectable var isSecure: Bool = false
     
     ///Animation
     private let animDuration: TimeInterval = 0.3
@@ -53,23 +53,23 @@ import UIKit.UITextField
     ///Views
     internal var stateViewConstraintWidth: NSLayoutConstraint?
     internal var headerLabelConstraintTop: NSLayoutConstraint?
-    public var headerLabel: AttributedLabel?
-    public var descriptionLabel: AttributedLabel?
-    public var textField: UITextField?
-    public var separatorView: UIView?
-    public var stateView: UIView?
-    public var extraViewsContainer: UIView?
+    internal var headerLabel: AttributedLabel?
+    internal var descriptionLabel: AttributedLabel?
+    internal var textField: UITextField?
+    internal var separatorView: UIView?
+    internal var stateView: UIView?
+    internal var extraViewsContainer: UIView?
     
     ///Letter spacing
-    lazy var secureTextLetterSpacing: CGFloat = 5
-    lazy var unsecureTextLetterSpacing: CGFloat = -0.6
+    private lazy var secureTextLetterSpacing: CGFloat = 5
+    private lazy var unsecureTextLetterSpacing: CGFloat = -0.6
     
     ///Text
-    lazy var unsecurePassword = String()
-    lazy var securePassword = String()
+    private lazy var unsecureText = String()
+    private lazy var secureText = String()
     
     ///Size
-    lazy var stateViewWidth: CGFloat = 0
+    internal lazy var stateViewWidth: CGFloat = 0
     
     ///Delegate
     public weak var delegate: FloatingLabelTextFieldDelegate?
@@ -83,7 +83,7 @@ import UIKit.UITextField
         super.init(frame: frame)
         configure()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         configure()
@@ -93,22 +93,11 @@ import UIKit.UITextField
 // MARK: - Configure
 extension FloatingLabelTextField {
     
-    private func setAttributedText(text: String) {
-        guard let textField = textField else { return }
-        
-        let letterSpacing = isSecure ? secureTextLetterSpacing : unsecureTextLetterSpacing
-        let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttribute(.kern,
-                                      value: letterSpacing,
-                                      range: NSRange(location: 0, length: attributedString.length))
-        textField.attributedText = attributedString
-    }
-    
     private func configure() {
         backgroundColor = .clear
         
         UIFont.registerLibraryFonts()
-      
+        
         createHeaderLabel()
         createTextField()
         createSeparator()
@@ -154,7 +143,7 @@ extension FloatingLabelTextField {
         stateView?.translatesAutoresizingMaskIntoConstraints =  false
         stateViewWidth = frame.width
         addSubview(stateView!)
-    
+        
         constraints(for: stateView)
     }
     
@@ -207,7 +196,7 @@ extension FloatingLabelTextField {
     
     public func switchTextFormat(secure: Bool) {
         isSecure = !isSecure
-        setAttributedText(text: secure ? securePassword : unsecurePassword)
+        setAttributedText(text: secure ? secureText : unsecureText)
     }
     
     public func updateSecureLine(to state: InputTextState, text: String?, color: UIColor?) {
@@ -218,14 +207,47 @@ extension FloatingLabelTextField {
             descriptionLabel?.textColor = .white
             descriptionLabel?.isHidden = true
             return
-
+            
         } else { descriptionLabel?.isHidden = false }
-
+        
         if let descrLabel = descriptionLabel {
             descrLabel.text = text
             descrLabel.textColor = color
             stateView.backgroundColor = color
         }
+    }
+    
+    public func isSecute() -> Bool { return isSecure }
+    
+    public func setKeyboardType(_ type: UIKeyboardType) {
+         textField?.keyboardType = type
+    }
+    
+    public func getText() -> String {
+        return unsecureText
+    }
+    
+    public func setText(_ text: String) {
+        updateText(text: text)
+        setAttributedText(text: isSecure ? secureText : unsecureText)
+        handleText(unsecureText)
+    }
+    
+    private func setAttributedText(text: String) {
+        guard let textField = textField else { return }
+        
+        let letterSpacing = isSecure ? secureTextLetterSpacing : unsecureTextLetterSpacing
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(.kern,
+                                      value: letterSpacing,
+                                      range: NSRange(location: 0, length: attributedString.length))
+        textField.attributedText = attributedString
+    }
+    
+    private func updateText(text: String) {
+        unsecureText = text
+        secureText.removeAll()
+        for _ in unsecureText {  secureText += "●" }
     }
 }
 
@@ -248,7 +270,7 @@ extension FloatingLabelTextField {
         let viewHeight: CGFloat = frame.height, viewSpacing: CGFloat = 8
         let containerView = UIView()
         var i = 0, conainerViewWidth: CGFloat = 0
-    
+        
         while i < images.count {
             let image = images[i]
             let spacing = (i != 0 ? viewSpacing : 0)
@@ -299,19 +321,19 @@ extension FloatingLabelTextField: UITextFieldDelegate {
                           replacementString string: String) -> Bool {
         guard isSecure else { return true }
         
-        var securePassword = String()
-        let offsetToUpdate = unsecurePassword.index(unsecurePassword.startIndex, offsetBy: range.location)
+        var secureText = String()
+        let offsetToUpdate = unsecureText.index(unsecureText.startIndex, offsetBy: range.location)
         
         if string.isEmpty {
-            unsecurePassword.remove(at: offsetToUpdate)
+            unsecureText.remove(at: offsetToUpdate)
             return true
-        } else { unsecurePassword.insert(string.first!, at: offsetToUpdate) }
+        } else { unsecureText.insert(string.first!, at: offsetToUpdate) }
         
-        for _ in unsecurePassword {  securePassword += "●" }
-        self.securePassword = securePassword
+        for _ in unsecureText {  secureText += "●" }
+        self.secureText = secureText
         
-        setAttributedText(text: securePassword)
-        handleText(unsecurePassword)
+        setAttributedText(text: secureText)
+        handleText(unsecureText)
         NotificationCenter.default.post(name: UITextField.textDidChangeNotification, object: textField)
         
         return false
@@ -319,13 +341,8 @@ extension FloatingLabelTextField: UITextFieldDelegate {
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        if !isSecure {
-            unsecurePassword = text
-            securePassword.removeAll()
-            for _ in unsecurePassword {  securePassword += "●" }
-        } else {
-            securePassword.removeLast()
-        }
+        if !isSecure { updateText(text: text) }
+        else { secureText.removeLast() }
         handleText(text)
     }
 }

@@ -22,7 +22,6 @@ final class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        emailFloatingTextField.textField?.keyboardType = .emailAddress
         passwordFloatingTextField.addRightExtraView(text: "Forgot?", color: UIColor(hex: "00ab80"))
     }
 }

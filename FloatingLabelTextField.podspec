@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.swift_version = '4.2'
   s.name             = 'FloatingLabelTextField'
-  s.version          = '1.0.4'
+  s.version          = '1.0.5'
   s.summary          = 'FloatingLabelTextField'
 
 # This description is used to generate tags and improve search results.
