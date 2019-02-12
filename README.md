@@ -87,19 +87,19 @@ Also you can setup the view in the Interface Builder
   ...
   
   floatingLabelTextField.events.append() { event in
-            switch(event) {
-                case .didStartEditing( _): print("didStartEditing")
-                case .didEndEditing( _): print("didEndEditing")
-                case .didTextChanged( _): print("didTextChanged")
-                case .didExtraButtonPressed(let floatingTextField, let index, let button):
-                    if index == 0 {
-                        floatingTextField.switchTextFormat(secure: self.isSecureFormat)
-                        button.setImage(UIImage(named: self.isSecureFormat ? "eye_off" : "eye_on")!, for: .normal)
+         switch(event) {
+             case .didStartEditing( _): print("didStartEditing")
+             case .didEndEditing( _): print("didEndEditing")
+             case .didTextChanged( _): print("didTextChanged")
+             case .didExtraButtonPressed(let floatingTextField, let index, let button):
+                 if index == 0 {
+                    floatingTextField.switchTextFormat(secure: self.isSecureFormat)
+                    button.setImage(UIImage(named: self.isSecureFormat ? "eye_off" : "eye_on")!, for: .normal)
                     
-                        self.isSecureFormat = !self.isSecureFormat
-                    }
-            }
-        }
+                    self.isSecureFormat = !self.isSecureFormat
+                 }
+         }
+  }
 ```
 
 ## Requirements
