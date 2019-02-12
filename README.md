@@ -66,18 +66,16 @@ Also you can setup the view in the Interface Builder
 ```swift
  extension ViewController: FloatingLabelTextFieldDelegate {
     
-    func state(for floatingTextField: FloatingLabelTextField) -> (state: InputTextState, description: String?, color: UIColor){
-        if let textLength = floatingTextField.textField?.text?.count {
-            switch textLength {
-                case 1...2: return (.invalid, "Invalid", UIColor(hex: "ff3f4c"))
-                case 3...5: return (.unreliable, "Unreliable", UIColor(hex: "ff793f"))
-                case 6...8: return (.medium, "Medium", UIColor(hex: "f5a623"))
-                case 9...11: return (.reliable, "Reliable", UIColor(hex: "00ab80"))
-                case let number where number >= 12: return (.max, "Max", UIColor(hex: "00c99c"))
-                default: return (.idle, nil, .clear)
-            }
+    func state(for floatingTextField: FloatingLabelTextField) -> (state: InputTextState, description: String?, color: UIColor) {
+        let textLength = floatingTextField.getText().count
+        switch textLength {
+            case 1...2: return (.invalid, "Invalid", UIColor(hex: "ff3f4c"))
+            case 3...5: return (.unreliable, "Unreliable", UIColor(hex: "ff793f"))
+            case 6...8: return (.medium, "Medium", UIColor(hex: "f5a623"))
+            case 9...11: return (.reliable, "Reliable", UIColor(hex: "00ab80"))
+            case let number where number >= 12: return (.max, "Max", UIColor(hex: "00c99c"))
+            default: return (.idle, nil, .clear)
         }
-        return (.idle, nil, .clear)
     }
 }
 ```
