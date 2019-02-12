@@ -68,9 +68,7 @@ extension UIFont {
 
         var error: Unmanaged<CFError>?
         if !CTFontManagerRegisterGraphicsFont(font, &error) {
-            let errorDescription: CFString = CFErrorCopyDescription(error!.takeUnretainedValue())
-            guard let nsError = error?.takeUnretainedValue() as AnyObject as? NSError else { return }
-            NSException(name: NSExceptionName.internalInconsistencyException, reason: errorDescription as String, userInfo: [NSUnderlyingErrorKey: nsError]).raise()
+            //can produce font already added error, skip handling
         }
     }
     

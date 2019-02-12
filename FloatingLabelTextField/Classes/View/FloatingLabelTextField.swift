@@ -342,7 +342,7 @@ extension FloatingLabelTextField: UITextFieldDelegate {
     @objc private func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text else { return }
         if !isSecure { updateText(text: text) }
-        else { secureText.removeLast() }
+        else if !secureText.isEmpty { secureText.removeLast() }
         handleText(text)
     }
 }
