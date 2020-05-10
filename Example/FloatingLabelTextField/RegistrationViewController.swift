@@ -42,7 +42,7 @@ final class RegistrationViewController: UIViewController {
 extension RegistrationViewController: FloatingLabelTextFieldDelegate {
     
     func state(for floatingTextField: FloatingLabelTextField) -> (state: InputTextState, description: String?, color: UIColor) {
-        let textLength = floatingTextField.getText().count
+        let textLength = floatingTextField.text.count
         switch textLength {
             case 1...2: return (.invalid, "Invalid", UIColor(hex: "ff3f4c"))
             case 3...5: return (.unreliable, "Unreliable", UIColor(hex: "ff793f"))

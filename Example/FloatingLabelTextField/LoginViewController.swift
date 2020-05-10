@@ -21,7 +21,7 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         passwordFloatingTextField.addRightText("Forgot?", color: UIColor.white)
     }
 }
