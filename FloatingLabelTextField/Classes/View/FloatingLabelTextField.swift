@@ -437,11 +437,11 @@ extension FloatingLabelTextField: UITextFieldDelegate {
             let charsToRemove = unsecureText.distance(from: startIndex, to: endIndex)
             let lastSelectedCharIndex = unsecureText.distance(from: unsecureText.startIndex, to: endIndex)
             
-            // Determinate caret position after text has been cropped
-            selectionPosition = lastSelectedCharIndex - charsToRemove
+            // Determinate caret position after text has been cropped (shift pos by 1 if string isn't empty to keep caret ahead)
+            selectionPosition = lastSelectedCharIndex - charsToRemove + (string.isEmpty ? 0 : 1)
             
             // Replaces selected range with emptiness
-            unsecureText.replaceSubrange(startIndex..<endIndex, with: "")
+            unsecureText.replaceSubrange(startIndex..<endIndex, with: string)
         } else {
             // Gets current caret position
             if let selectedTextRange = textField.selectedTextRange {
