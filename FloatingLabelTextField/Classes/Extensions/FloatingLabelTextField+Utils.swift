@@ -13,7 +13,7 @@ public enum Event {
     case didStartEditing(_ floatingTextField: FloatingLabelTextField)
     case didEndEditing(_ floatingTextField: FloatingLabelTextField)
     case didTextChanged(_ floatingTextField: FloatingLabelTextField)
-    case didExtraButtonPressed(floatingTextField: FloatingLabelTextField, index: Int, button: UIButton)
+    case didRightButtonPressed(_ floatingTextField: FloatingLabelTextField, index: Int, button: UIButton)
 }
 
 public enum InputTextState: CGFloat {

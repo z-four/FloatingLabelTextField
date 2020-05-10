@@ -386,12 +386,12 @@ extension FloatingLabelTextField {
         if let rightView = textField?.rightView {
             if let button = rightView as? UIButton {
                 // Notifies for button pressed event
-                events.forEach { $0(.didExtraButtonPressed(floatingTextField: self, index: index, button: button)) }
+                events.forEach { $0(.didRightButtonPressed(self, index: index, button: button)) }
                 
             } else if let subviews = textField?.rightView?.subviews, subviews.count > 0,
                 let button = subviews[index] as? UIButton {
                 // Notifies for button pressed event
-                events.forEach { $0(.didExtraButtonPressed(floatingTextField: self, index: index, button: button)) }
+                events.forEach { $0(.didRightButtonPressed(self, index: index, button: button)) }
             }
         }
     }
