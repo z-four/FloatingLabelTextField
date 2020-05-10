@@ -264,11 +264,18 @@ extension FloatingLabelTextField {
     /// Switches text format to secure or not.
     /// - Parameter secure: Represents should text be secure or not .
     public func switchTextFormat(secure: Bool) {
-       // Toggles secure state
-       isSecure = !isSecure
-       
-       // Updates text with new state
-       setAttributedText(secure ? secureText : unsecureText)
+        // Toggles secure state
+        isSecure = !isSecure
+        
+        // Save current text selection
+        let selectedTextRange = textField?.selectedTextRange
+        
+        // Updates text with new state
+        setAttributedText(secure ? secureText : unsecureText)
+        
+        if let selectedTextRange = selectedTextRange {
+            textField?.selectedTextRange = selectedTextRange
+        }
     }
        
     public func updateSecureLine(to state: InputTextState, text: String?, color: UIColor?) {
@@ -277,7 +284,7 @@ extension FloatingLabelTextField {
         // Updates line width depending on state
         stateViewConstraintWidth?.constant = state.rawValue * stateViewWidth
        
-        // If it is idle state then hide descr label
+        // If state is idle then hide descr label
         // otherwise make it visible
         if state == .idle {
             descriptionLabel?.textColor = .white
@@ -417,14 +424,38 @@ extension FloatingLabelTextField: UITextFieldDelegate {
         
         // Creates new instance of secure text
         var secureText = String()
-        let offsetToUpdate = unsecureText.index(unsecureText.startIndex, offsetBy: range.location)
-        
-        // Refreshes secure text
-        if string.isEmpty {
-            unsecureText.remove(at: offsetToUpdate)
-            return true
+        var selectionPosition = -1
+        if let selectedTextIndexes = textField.selectedTextIndexes() {
+            let startIndex = selectedTextIndexes.startIndex
+            let endIndex = selectedTextIndexes.endIndex
+            let charsToRemove = unsecureText.distance(from: startIndex, to: endIndex)
+            let lastSelectedCharIndex = unsecureText.distance(from: unsecureText.startIndex, to: endIndex)
+            
+            // Determinate caret position after text has been cropped
+            selectionPosition = lastSelectedCharIndex - charsToRemove
+            
+            // Replaces selected range with emptiness
+            unsecureText.replaceSubrange(startIndex..<endIndex, with: "")
         } else {
-            unsecureText.insert(string.first!, at: offsetToUpdate)
+            // Gets current caret position
+            if let selectedTextRange = textField.selectedTextRange {
+                selectionPosition = textField.offset(from: textField.beginningOfDocument, to: selectedTextRange.start) + 1
+            }
+            
+            // Determinate offset to be text changed for
+            let offsetToUpdate = unsecureText.index(unsecureText.startIndex, offsetBy: range.location)
+            if string.isEmpty {
+                unsecureText.remove(at: offsetToUpdate)
+                return true
+            } else {
+                if string.count > 1 {
+                    for ch in string.reversed() {
+                        unsecureText.insert(ch, at: offsetToUpdate)
+                    }
+                } else {
+                    unsecureText.insert(string.first!, at: offsetToUpdate)
+                }
+            }
         }
         
         // Fills string with secure chars
@@ -435,6 +466,12 @@ extension FloatingLabelTextField: UITextFieldDelegate {
         
         // Update text with secure onte
         setAttributedText(secureText)
+        
+        // Sets correct caret position after manipulations with the text
+        if selectionPosition != -1, let caretPosition = textField.position(from: textField.beginningOfDocument,
+                                                                           offset: selectionPosition) {
+            textField.selectedTextRange = textField.textRange(from: caretPosition, to: caretPosition)
+        }
         
         // Handle inputed text
         handleText(unsecureText)
