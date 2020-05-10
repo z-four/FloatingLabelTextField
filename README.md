@@ -17,40 +17,48 @@
  override func viewDidLoad() {
      super.viewDidLoad()
     
-     floatingLabelTextField.addRightExtraView(text: "Forgot?", color: UIColor(hex: "00ab80"))
+     // Add right label with color
+     floatingLabelTextField.addRightText("Forgot?", color: UIColor.white)
     
-     //add images as right view
-     floatingLabelTextField.addRightExtraViews(images: [UIImage(named: "image")!])
+     // Add right images
+     floatingLabelTextField.addRightImages([UIImage(named: "image")!])
      
-     //disable/enable secure mode
-     floatingLabelTextField.switchTextFormat(secure: false)
+     // Toggle text format, whether secured or not
+     floatingLabelTextField.toggleTextFormat()
      
-     //update bottom line state
+     // Update secure line and description text 
      floatingLabelTextField.updateSecureLine(to: .max, text: "Some description", color: .red)
      
-     //check current mode
+     // Check if current mode is secure
      floatingLabelTextField.isSecure()
      
-     //setup the view programmatically
+     // Change the keyboard type
+     floatingLabelTextField.setKeyboardType(.emailAddress)
+     
+     // Change the autocorrection type
+     floatingLabelTextField.setAutocorrectionType(.no)
+     
+     // Configure style programmatically
      floatingLabelTextField.separatorColor = .blue
      floatingLabelTextField.headerText = "Header"
      floatingLabelTextField.headerColor = .green
      floatingLabelTextField.placeholderText = "Placeholder"
      floatingLabelTextField.placeholderColor = .red
-     floatingLabelTextField.setKeyboardType(.emailAddress)
  }
  
  override func viewDidAppear(_ animated: Bool) {
      super.viewDidAppear(animated)
      
-     //set text when FloatingTextField has been loaded
+     // Update text once view has been loaded
      floatingLabelTextField.setText("Some text")
+     
+     // Get inputted text whenever you want
      floatingLabelTextField.getText()
  }
  
 ```
 
-Also you can setup the view in the Interface Builder
+Also you can configure style via Interface Builder
 
 ```swift
   @IBInspectable var separatorColor: UIColor?
@@ -83,20 +91,18 @@ Also you can setup the view in the Interface Builder
 ##### Listener
 
 ```swift
-  private var isSecureFormat = false
-  ...
-  
   floatingLabelTextField.events.append() { event in
          switch(event) {
-             case .didStartEditing( _): print("didStartEditing")
-             case .didEndEditing( _): print("didEndEditing")
-             case .didTextChanged( _): print("didTextChanged")
+             case .didStartEditing( _): print("DidStartEditing")
+             case .didEndEditing( _): print("DidEndEditing")
+             case .didTextChanged( _): print("DidTextChanged")
              case .didExtraButtonPressed(let floatingTextField, let index, let button):
                  if index == 0 {
-                    floatingTextField.switchTextFormat(secure: self.isSecureFormat)
-                    button.setImage(UIImage(named: self.isSecureFormat ? "eye_off" : "eye_on")!, for: .normal)
+                    // Change current text format
+                    floatingTextField.toggleTextFormat()
                     
-                    self.isSecureFormat = !self.isSecureFormat
+                    // Update button if needed
+                    button.setImage(UIImage(named: self.isSecureFormat ? "eye_off" : "eye_on")!, for: .normal)
                  }
          }
   }
