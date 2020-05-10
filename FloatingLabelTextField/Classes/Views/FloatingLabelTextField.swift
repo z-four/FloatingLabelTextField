@@ -23,10 +23,10 @@ import UIKit.UITextField
     private var storedHeaderColor: UIColor = UIColor.floatingLabelColor
     @IBInspectable public var headerColor: UIColor {
         set {
-            if let text = headerLabel?.getText() {
+            storedHeaderColor = newValue
+            if let text = headerLabel?.getText(), !text.isEmpty {
                 headerLabel?.setText(text: text, color: newValue)
             }
-            storedHeaderColor = newValue
         }
         get { return storedHeaderColor }
     }
