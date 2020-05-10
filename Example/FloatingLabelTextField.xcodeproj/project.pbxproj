@@ -12,7 +12,6 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		DAD3008C2200E851005B545A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD300892200E851005B545A /* BaseViewController.swift */; };
 		DAD3008D2200E851005B545A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3008A2200E851005B545A /* LoginViewController.swift */; };
 		DAD3008E2200E851005B545A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD3008B2200E851005B545A /* RegistrationViewController.swift */; };
 /* End PBXBuildFile section */
@@ -31,7 +30,6 @@
 		BD1D65C6AD919DBA0D0A15A8 /* Pods-FloatingLabelTextField_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FloatingLabelTextField_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-FloatingLabelTextField_Example/Pods-FloatingLabelTextField_Example.release.xcconfig"; sourceTree = "<group>"; };
 		CC6F8E8B82E13F9FD1ED4A9D /* Pods-FloatingLabelTextField_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FloatingLabelTextField_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FloatingLabelTextField_Tests/Pods-FloatingLabelTextField_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D33ABA3ECC01569CF9339AE5 /* Pods_FloatingLabelTextField_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FloatingLabelTextField_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAD300892200E851005B545A /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DAD3008A2200E851005B545A /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DAD3008B2200E851005B545A /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		E926DEEE01E090874095BFB8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -92,7 +90,6 @@
 		607FACD21AFB9204008FA782 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				DAD300892200E851005B545A /* BaseViewController.swift */,
 				DAD3008A2200E851005B545A /* LoginViewController.swift */,
 				DAD3008B2200E851005B545A /* RegistrationViewController.swift */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
@@ -239,7 +236,6 @@
 			files = (
 				DAD3008D2200E851005B545A /* LoginViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				DAD3008C2200E851005B545A /* BaseViewController.swift in Sources */,
 				DAD3008E2200E851005B545A /* RegistrationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +347,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

@@ -10,11 +10,9 @@ import Foundation
 import FloatingLabelTextField
 
 // MARK: - Lifecycle
-final class RegistrationViewController: BaseViewController {
+final class RegistrationViewController: UIViewController {
     
     @IBOutlet private weak var passwordFloatingTextField: FloatingLabelTextField!
-    
-    private var isPasswordShown = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -23,19 +21,18 @@ final class RegistrationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        passwordFloatingTextField.addRightImages([UIImage.init(named: "eye")!.withTintColor(UIColor.white),
+                                                  UIImage.init(named: "copy")!])
         passwordFloatingTextField.delegate = self
         passwordFloatingTextField.events.append() { event in
             switch(event) {
-                case .didStartEditing( _): print("didStartEditing")
-                case .didEndEditing( _): print("didEndEditing")
-                case .didTextChanged( _): print("didTextChanged")
-                case .didExtraButtonPressed(let floatingTextField, let index, let button):
-                    if index == 0 {
-                        floatingTextField.switchTextFormat(secure: self.isPasswordShown)
-                        button.setImage(UIImage(named: self.isPasswordShown ? "eye_off" : "eye_on")!, for: .normal)
-                    
-                        self.isPasswordShown = !self.isPasswordShown
-                    }
+            case .didStartEditing( _): print("DidStartEditing")
+            case .didEndEditing( _): print("DidEndEditing")
+            case .didTextChanged( _): print("DidTextChanged")
+            case .didRightButtonPressed(let floatingTextField, let index, _):
+                if index == 0 {
+                    floatingTextField.toggleTextFormat()
+                }
             }
         }
     }

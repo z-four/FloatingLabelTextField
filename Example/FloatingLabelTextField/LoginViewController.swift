@@ -10,7 +10,7 @@ import UIKit
 import FloatingLabelTextField
 
 // MARK: - Lifecycle
-final class LoginViewController: BaseViewController {
+final class LoginViewController: UIViewController {
 
     @IBOutlet private weak var emailFloatingTextField: FloatingLabelTextField!
     @IBOutlet private weak var passwordFloatingTextField: FloatingLabelTextField!
@@ -22,6 +22,6 @@ final class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        passwordFloatingTextField.addRightExtraView(text: "Forgot?", color: UIColor(hex: "00ab80"))
+        passwordFloatingTextField.addRightText("Forgot?", color: UIColor.white)
     }
 }
