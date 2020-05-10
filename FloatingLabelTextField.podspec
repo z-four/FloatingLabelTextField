@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.swift_version = '4.2'
+  s.swift_version    = '5.0'
   s.name             = 'FloatingLabelTextField'
-  s.version          = '1.0.6'
+  s.version          = '1.1.0'
   s.summary          = 'FloatingLabelTextField'
 
 # This description is used to generate tags and improve search results.
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Dmitriy Zhyzhko' => 'zfour.dev@gmail.com' }
   s.source           = { :git => 'https://github.com/z-four/FloatingLabelTextField.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
 s.source_files = 'FloatingLabelTextField/Classes/**/*.swift'
 #s.resource_bundles = {'FloatingLabelTextField' => ['FloatingLabelTextField/Classes/**/*']}
