@@ -98,11 +98,11 @@ Also you can configure style via Interface Builder
              case .didTextChanged( _): print("DidTextChanged")
              case .didExtraButtonPressed(let floatingTextField, let index, let button):
                  if index == 0 {
-                    // Change current text format
-                    floatingTextField.toggleTextFormat()
+                     // Change current text format
+                     floatingTextField.toggleTextFormat()
                     
-                    // Update button if needed
-                    button.setImage(UIImage(named: self.isSecureFormat ? "eye_off" : "eye_on")!, for: .normal)
+                     // Update button if needed
+                     button.setImage(UIImage(named: floatingTextField.isSecute() ? "eye_off" : "eye_on")!, for: .normal)
                  }
          }
   }
@@ -110,7 +110,9 @@ Also you can configure style via Interface Builder
 
 ## Requirements
 
-- CocoaPods 1.0.0+
+* iOS 9.0+
+* CocoaPods 1.0.0+
+* Swift 5
 
 ## Installation
 
