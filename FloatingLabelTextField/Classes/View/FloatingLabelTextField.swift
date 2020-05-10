@@ -261,9 +261,9 @@ extension FloatingLabelTextField {
 // MARK: - Configuration
 extension FloatingLabelTextField {
     
-    /// Switches text format to secure or not.
+    /// Toggles text format to secure or not.
     /// - Parameter secure: Represents should text be secure or not .
-    public func switchTextFormat(secure: Bool) {
+    public func toggleTextFormat() {
         // Toggles secure state
         isSecure = !isSecure
         
@@ -271,7 +271,7 @@ extension FloatingLabelTextField {
         let selectedTextRange = textField?.selectedTextRange
         
         // Updates text with new state
-        setAttributedText(secure ? secureText : unsecureText)
+        setAttributedText(isSecure ? secureText : unsecureText)
         
         if let selectedTextRange = selectedTextRange {
             textField?.selectedTextRange = selectedTextRange
