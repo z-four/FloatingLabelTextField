@@ -110,7 +110,6 @@ extension FloatingLabelTextField {
         createDescriptionLabel()
     }
     
-    
     /// Creates header label
     private func createHeaderLabel() {
         // Init and add header as a subview
@@ -338,7 +337,7 @@ extension FloatingLabelTextField {
         button.setTitleColor(color, for: .normal)
         button.setTitleColor(color.darker(), for: .highlighted)
         button.sizeToFit()
-        button.addTarget(self, action: #selector(onExtraViewClick(_:)), for: .touchDown)
+        button.addTarget(self, action: #selector(onRightViewClick(_:)), for: .touchDown)
         
         // Sets button as text field's right view
         textField?.rightViewMode = .always
@@ -357,16 +356,14 @@ extension FloatingLabelTextField {
         
         // Creates buttons in loop and adds to the container
         while i < images.count {
-            let image = images[i]
             let spacing = (i != 0 ? imageSpacing : 0)
-            let buttonX = (containerView.subviews.last?.frame.maxX ?? 0) + spacing
             let button = UIButton(frame: .zero)
-            button.frame.origin.x = buttonX
+            button.frame.origin.x = (containerView.subviews.last?.frame.maxX ?? 0) + spacing
             button.tag = i
             button.sizeToFit()
             button.imageView?.contentMode = .scaleAspectFit
-            button.setImage(image, for: .normal)
-            button.addTarget(self, action: #selector(onExtraViewClick(_:)), for: .touchDown)
+            button.setImage(images[i], for: .normal)
+            button.addTarget(self, action: #selector(onRightViewClick(_:)), for: .touchDown)
             conainerViewWidth = conainerViewWidth + button.frame.width + spacing
             containerView.addSubview(button)
             button.frame.origin.y = viewHeight / 2 - button.frame.height / 2
@@ -383,7 +380,7 @@ extension FloatingLabelTextField {
     
     /// Handles click on extra view.
     /// - Parameter button: Button that has been clicked.
-    @objc private func onExtraViewClick(_ button: UIButton) {
+    @objc private func onRightViewClick(_ button: UIButton) {
         // Gets tag that represent button's index in the parent view
         let index = button.tag
         if let rightView = textField?.rightView {
