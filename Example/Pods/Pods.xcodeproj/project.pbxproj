@@ -12,15 +12,17 @@
 		2D440E8F6DF6B389A71113544FE02033 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
 		5FD8520E0F2974F106B5AD051D8607E4 /* AttributedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030D49C47693F8254913965E8FF0A1E8 /* AttributedLabel.swift */; };
 		689775E9C7F2383DC04151CB7355D258 /* FloatingLabelTextField-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD1663DA29CEC356F68342E85A1533C /* FloatingLabelTextField-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8759E078F292DFB9F030E1DEE2576317 /* Font+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6F6CF138EAE6526ADB270585F76624 /* Font+Utils.swift */; };
+		8759E078F292DFB9F030E1DEE2576317 /* UIFont+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6F6CF138EAE6526ADB270585F76624 /* UIFont+Utils.swift */; };
 		8F9D9F9D787FF507C88E6293618F7154 /* Pods-FloatingLabelTextField_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 10E7B4EB5CE1507235F32502CFA2FC01 /* Pods-FloatingLabelTextField_Example-dummy.m */; };
 		BB700AA76800961324E4CE9256E3FF35 /* FloatingLabelTextField+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2E5A0A345D48B96592F508EF7D4BAC /* FloatingLabelTextField+Utils.swift */; };
 		D4994C08EA049C8FEE9D403AE432ABD0 /* FloatingLabelTextField-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EBD7A5027F06E920A70E885364B721E1 /* FloatingLabelTextField-dummy.m */; };
+		DAC91566246820FD00647672 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC91565246820FD00647672 /* Constants.swift */; };
+		DAC9156824682F0700647672 /* UITextField+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC9156724682F0700647672 /* UITextField+Utils.swift */; };
 		E082075B0273327BF3E80DC910123E9D /* FloatingLabelTextField.swift.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A568DBF2BD8EDAFB26D11CBDEA107F1 /* FloatingLabelTextField.swift.bundle */; };
 		E12E0D6769C27E51430C76FC323366FE /* FloatingLabelTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2638036AD827AD395458D55795AFF1 /* FloatingLabelTextField.swift */; };
 		EA7415238073C95F5483A4CE1847C0C7 /* Gerbera-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9EE88DD08DE9082ED80D199A46478EB /* Gerbera-Bold.otf */; };
 		F393557A514FAA8A8FC792B37FEF1EE1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		F3951CA09EA73C5B9EC69CEAC2786F89 /* Color+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93C1F1A6390744174CBC147B718A722 /* Color+Utils.swift */; };
+		F3951CA09EA73C5B9EC69CEAC2786F89 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93C1F1A6390744174CBC147B718A722 /* UIColor+Utils.swift */; };
 		F39C5507B527E1EEE500EF959C1F8B14 /* Gerbera-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F379C2D7E571F018B82F18C9FC0512B2 /* Gerbera-Medium.otf */; };
 		F59093486C990033CD06AA9893AF1FE0 /* Pods-FloatingLabelTextField_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E6B29FFD2B1E195153F6A46690BEEBA3 /* Pods-FloatingLabelTextField_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F9B5BB0C9189A137A89D6D782A427D38 /* Gerbera-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 83F9ACC9CA7F228B636D9EC50263B29C /* Gerbera-Black.otf */; };
@@ -70,11 +72,13 @@
 		9757AE10C9CEDD2A0A69DB08BBED7908 /* Pods-FloatingLabelTextField_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FloatingLabelTextField_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B271F81F76569D5149E4343BADD0BEB4 /* Pods-FloatingLabelTextField_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FloatingLabelTextField_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		D611D7F1D32D7F2C1A2111E5E7CD0FCF /* FloatingLabelTextField.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = FloatingLabelTextField.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		DE6F6CF138EAE6526ADB270585F76624 /* Font+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Font+Utils.swift"; sourceTree = "<group>"; };
+		DAC91565246820FD00647672 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = FloatingLabelTextField/Classes/Constants.swift; sourceTree = "<group>"; };
+		DAC9156724682F0700647672 /* UITextField+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Utils.swift"; sourceTree = "<group>"; };
+		DE6F6CF138EAE6526ADB270585F76624 /* UIFont+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIFont+Utils.swift"; sourceTree = "<group>"; };
 		E510348186FC6570189DB827C64509B7 /* Pods_FloatingLabelTextField_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FloatingLabelTextField_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6B29FFD2B1E195153F6A46690BEEBA3 /* Pods-FloatingLabelTextField_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FloatingLabelTextField_Example-umbrella.h"; sourceTree = "<group>"; };
 		E8E03F7B4F7CE9D3406763F02F3C2FE7 /* Pods-FloatingLabelTextField_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FloatingLabelTextField_Example-resources.sh"; sourceTree = "<group>"; };
-		E93C1F1A6390744174CBC147B718A722 /* Color+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Color+Utils.swift"; sourceTree = "<group>"; };
+		E93C1F1A6390744174CBC147B718A722 /* UIColor+Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		E9EE88DD08DE9082ED80D199A46478EB /* Gerbera-Bold.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Gerbera-Bold.otf"; path = "FloatingLabelTextField/Gerbera-Bold.otf"; sourceTree = "<group>"; };
 		EBD7A5027F06E920A70E885364B721E1 /* FloatingLabelTextField-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FloatingLabelTextField-dummy.m"; sourceTree = "<group>"; };
 		F379C2D7E571F018B82F18C9FC0512B2 /* Gerbera-Medium.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Gerbera-Medium.otf"; path = "FloatingLabelTextField/Gerbera-Medium.otf"; sourceTree = "<group>"; };
@@ -163,10 +167,11 @@
 				830305BD4D8A652D9B23B3DDE2FF46AF /* Gerbera-Light.otf */,
 				F379C2D7E571F018B82F18C9FC0512B2 /* Gerbera-Medium.otf */,
 				24709845F94FDDE79CEE7A0618B7FD02 /* Gerbera-Regular.otf */,
+				DAC91565246820FD00647672 /* Constants.swift */,
+				D2427E60BD69718E87EFF5FE5AC3DF25 /* View */,
 				EAC276A7C8F21A3761CA6A5EF0F5EF5C /* Extensions */,
 				1773A27671DA70F77B285187CF627B88 /* Pod */,
 				EFCE5F65B23654ABDE197C76732AC606 /* Support Files */,
-				D2427E60BD69718E87EFF5FE5AC3DF25 /* View */,
 			);
 			name = FloatingLabelTextField;
 			path = ../..;
@@ -219,9 +224,10 @@
 		EAC276A7C8F21A3761CA6A5EF0F5EF5C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E93C1F1A6390744174CBC147B718A722 /* Color+Utils.swift */,
+				E93C1F1A6390744174CBC147B718A722 /* UIColor+Utils.swift */,
 				2E2E5A0A345D48B96592F508EF7D4BAC /* FloatingLabelTextField+Utils.swift */,
-				DE6F6CF138EAE6526ADB270585F76624 /* Font+Utils.swift */,
+				DE6F6CF138EAE6526ADB270585F76624 /* UIFont+Utils.swift */,
+				DAC9156724682F0700647672 /* UITextField+Utils.swift */,
 			);
 			name = Extensions;
 			path = FloatingLabelTextField/Classes/Extensions;
@@ -384,11 +390,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FD8520E0F2974F106B5AD051D8607E4 /* AttributedLabel.swift in Sources */,
-				F3951CA09EA73C5B9EC69CEAC2786F89 /* Color+Utils.swift in Sources */,
+				F3951CA09EA73C5B9EC69CEAC2786F89 /* UIColor+Utils.swift in Sources */,
 				BB700AA76800961324E4CE9256E3FF35 /* FloatingLabelTextField+Utils.swift in Sources */,
 				D4994C08EA049C8FEE9D403AE432ABD0 /* FloatingLabelTextField-dummy.m in Sources */,
+				DAC91566246820FD00647672 /* Constants.swift in Sources */,
+				DAC9156824682F0700647672 /* UITextField+Utils.swift in Sources */,
 				E12E0D6769C27E51430C76FC323366FE /* FloatingLabelTextField.swift in Sources */,
-				8759E078F292DFB9F030E1DEE2576317 /* Font+Utils.swift in Sources */,
+				8759E078F292DFB9F030E1DEE2576317 /* UIFont+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
