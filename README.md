@@ -30,7 +30,7 @@
      floatingLabelTextField.updateSecureLine(to: .max, text: "Some description", color: .red)
      
      // Check if current mode is secure
-     floatingLabelTextField.isSecure()
+     floatingLabelTextField.isSecure
      
      // Change the keyboard type
      floatingLabelTextField.setKeyboardType(.emailAddress)
@@ -44,16 +44,18 @@
      floatingLabelTextField.headerColor = .green
      floatingLabelTextField.placeholderText = "Placeholder"
      floatingLabelTextField.placeholderColor = .red
+     floatingLabelTextField.selectionColor = .red
+     floatingLabelTextField.textColor = .white
  }
  
  override func viewDidAppear(_ animated: Bool) {
      super.viewDidAppear(animated)
      
      // Update text once view has been loaded
-     floatingLabelTextField.setText("Some text")
+     floatingLabelTextField.text = "Some text"
      
      // Get inputted text whenever you want
-     floatingLabelTextField.getText()
+     floatingLabelTextField.text
  }
  
 ```
@@ -61,12 +63,14 @@
 Also you can configure style via Interface Builder
 
 ```swift
-  @IBInspectable var separatorColor: UIColor?
+  @IBInspectable var separatorColor: UIColor
   @IBInspectable var headerColor: UIColor
   @IBInspectable var headerText: String?
   @IBInspectable var placeholderColor: UIColor 
   @IBInspectable var placeholderText: String?
-  @IBInspectable var isSecure: Bool = true
+  @IBInspectable var textColor: UIColor
+  @IBInspectable var selectionColor: UIColor
+  @IBInspectable var isSecure: Bool
 ```
 
 ##### Delegate
@@ -75,7 +79,7 @@ Also you can configure style via Interface Builder
  extension ViewController: FloatingLabelTextFieldDelegate {
     
     func state(for floatingTextField: FloatingLabelTextField) -> (state: InputTextState, description: String?, color: UIColor) {
-        let textLength = floatingTextField.getText().count
+        let textLength = floatingTextField.text.count
         switch textLength {
             case 1...2: return (.invalid, "Invalid", UIColor(hex: "ff3f4c"))
             case 3...5: return (.unreliable, "Unreliable", UIColor(hex: "ff793f"))
