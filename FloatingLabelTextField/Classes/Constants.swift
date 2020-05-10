@@ -21,10 +21,21 @@ struct Constants {
         static let secureLetterSpacing: CGFloat = 5
         static let unsecureLetterSpacing: CGFloat = -0.6
         static let fontSize: CGFloat = 18
+        static let height: CGFloat = 32
+        static let topSpacing: CGFloat = 2
+    }
+    
+    struct Separator {
+        static let topSpacing: CGFloat = 2
+    }
+    
+    struct StateView {
+        static let topSpacing: CGFloat = 2
     }
     
     struct Description {
         static let fontSize: CGFloat = 10
+        static let topSpacing: CGFloat = 6
     }
     
     struct RightLabel {
