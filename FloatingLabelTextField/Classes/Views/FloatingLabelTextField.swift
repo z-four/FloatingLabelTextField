@@ -71,6 +71,15 @@ import UIKit.UITextField
         get { return storedTextColor  }
     }
     
+    private var storedSelectionColor: UIColor = UIColor.systemBlue
+       @IBInspectable public var selectionColor: UIColor {
+           set {
+               textField?.tintColor = newValue
+               storedSelectionColor = newValue
+           }
+           get { return storedSelectionColor  }
+       }
+    
     @IBInspectable public var isSecure: Bool = false
     
     public var text: String {
@@ -172,6 +181,7 @@ extension FloatingLabelTextField {
         textField?.delegate = self
         textField?.font = FontFamily.Gerbera.medium.font(size: Constants.TextField.fontSize)
         textField?.textColor = textColor
+        textField?.tintColor = storedSelectionColor
         textField?.rightViewMode = .always
         textField?.translatesAutoresizingMaskIntoConstraints =  false
         textField?.addTarget(self, action: #selector(textFieldDidChange(_:)),for: .editingChanged)
