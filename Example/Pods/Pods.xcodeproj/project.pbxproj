@@ -168,7 +168,7 @@
 				F379C2D7E571F018B82F18C9FC0512B2 /* Gerbera-Medium.otf */,
 				24709845F94FDDE79CEE7A0618B7FD02 /* Gerbera-Regular.otf */,
 				DAC91565246820FD00647672 /* Constants.swift */,
-				D2427E60BD69718E87EFF5FE5AC3DF25 /* View */,
+				D2427E60BD69718E87EFF5FE5AC3DF25 /* Views */,
 				EAC276A7C8F21A3761CA6A5EF0F5EF5C /* Extensions */,
 				1773A27671DA70F77B285187CF627B88 /* Pod */,
 				EFCE5F65B23654ABDE197C76732AC606 /* Support Files */,
@@ -195,14 +195,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D2427E60BD69718E87EFF5FE5AC3DF25 /* View */ = {
+		D2427E60BD69718E87EFF5FE5AC3DF25 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				030D49C47693F8254913965E8FF0A1E8 /* AttributedLabel.swift */,
 				5C2638036AD827AD395458D55795AFF1 /* FloatingLabelTextField.swift */,
 			);
-			name = View;
-			path = FloatingLabelTextField/Classes/View;
+			name = Views;
+			path = FloatingLabelTextField/Classes/Views;
 			sourceTree = "<group>";
 		};
 		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
