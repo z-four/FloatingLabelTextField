@@ -433,7 +433,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/FloatingLabelTextField/FloatingLabelTextField-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/FloatingLabelTextField/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FloatingLabelTextField/FloatingLabelTextField.modulemap";
 				PRODUCT_MODULE_NAME = FloatingLabelTextField;
@@ -456,7 +456,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/FloatingLabelTextField";
 				INFOPLIST_FILE = "Target Support Files/FloatingLabelTextField/ResourceBundle-FloatingLabelTextField.swift-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = FloatingLabelTextField.swift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -637,7 +637,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/FloatingLabelTextField/FloatingLabelTextField-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/FloatingLabelTextField/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FloatingLabelTextField/FloatingLabelTextField.modulemap";
 				PRODUCT_MODULE_NAME = FloatingLabelTextField;
@@ -661,7 +661,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/FloatingLabelTextField";
 				INFOPLIST_FILE = "Target Support Files/FloatingLabelTextField/ResourceBundle-FloatingLabelTextField.swift-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PRODUCT_NAME = FloatingLabelTextField.swift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
