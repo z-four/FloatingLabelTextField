@@ -79,7 +79,7 @@ import UIKit.UITextField
     private lazy var unsecureText = String()
     private lazy var secureText = String()
     
-    var isFloatingShown = false
+    var isFloatingLabelShown = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -194,7 +194,7 @@ extension FloatingLabelTextField {
         // Toggle header state (show or hide)
         if let inputedText = text {
             let symbolsCount = inputedText.count
-            if symbolsCount >= 1 && !isFloatingShown { toggleHeaderLabel() }
+            if symbolsCount >= 1 && !isFloatingLabelShown { toggleHeaderLabel() }
             else if symbolsCount < 1 { toggleHeaderLabel() }
         }
         
@@ -209,12 +209,12 @@ extension FloatingLabelTextField {
     private func toggleHeaderLabel() {
         guard let headerLabel = headerLabel else { return }
         
-        // Updates the state
-        isFloatingShown = !isFloatingShown
+        // Updates floating label state
+        isFloatingLabelShown = !isFloatingLabelShown
         
         // Calculate correct header position
         let currFrame = headerLabel.frame
-        let value = !isFloatingShown ? currFrame.origin.y + currFrame.height : currFrame.origin.y - currFrame.height
+        let value = !isFloatingLabelShown ? currFrame.origin.y + currFrame.height : currFrame.origin.y - currFrame.height
         
         // Updates constraint value
         headerLabelConstraintTop?.constant = value
@@ -227,7 +227,7 @@ extension FloatingLabelTextField {
             }
             
             UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: self.animDuration / 2) {
-                headerLabel.alpha = !self.isFloatingShown ? 0 : 1
+                headerLabel.alpha = !self.isFloatingLabelShown ? 0 : 1
             }
             
         }, completion: nil)
@@ -326,12 +326,11 @@ extension FloatingLabelTextField {
 // MARK: - Extra views
 extension FloatingLabelTextField {
     
-    
     /// Add right label to the text field with specific color.
     /// - Parameters:
     ///   - text: Label's text.
     ///   - color: Text color.
-    public func addRightExtraView(text: String, color: UIColor) {
+    public func addRightText(_ text: String, color: UIColor) {
         // Init and button with basic configs
         let button = UIButton(frame: CGRect(x: 0, y: 0,
                                             width: frame.height, height: frame.height))
@@ -343,14 +342,14 @@ extension FloatingLabelTextField {
         button.addTarget(self, action: #selector(onExtraViewClick(_:)), for: .touchDown)
         
         // Sets button as text field's right view
+        textField?.rightViewMode = .always
         textField?.rightView = button
     }
     
     /// Add images to the right of the text field.
     /// - Parameters:
     ///   - images: Array of images.
-    public func addRightExtraViews(images: [UIImage]) {
-        let viewSpacing: CGFloat = 8
+    public func addRightImages(_ images: [UIImage], spacing: CGFloat = 8) {
         let viewHeight: CGFloat = frame.height
         let containerView = UIView()
         var conainerViewWidth: CGFloat = 0
@@ -359,7 +358,7 @@ extension FloatingLabelTextField {
         // Creates buttons in loop and adds to the container
         while i < images.count {
             let image = images[i]
-            let spacing = (i != 0 ? viewSpacing : 0)
+            let spacing = (i != 0 ? spacing : 0)
             let buttonX = (containerView.subviews.last?.frame.maxX ?? 0) + spacing
             let button = UIButton(frame: .zero)
             button.frame.origin.x = buttonX
@@ -378,6 +377,7 @@ extension FloatingLabelTextField {
         containerView.frame = CGRect(x: 0, y: 0, width: conainerViewWidth, height: viewHeight)
         
         // Sets button as text field's right view
+        textField?.rightViewMode = .always
         textField?.rightView = containerView
     }
     
