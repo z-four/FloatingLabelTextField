@@ -310,6 +310,12 @@ extension FloatingLabelTextField {
     public func setKeyboardType(_ type: UIKeyboardType) {
         textField?.keyboardType = type
     }
+    
+    /// Sets text field autocorrection type.
+    /// - Parameter type: UITextAutocorrectionType to be setted.
+    public func setAutocorrectionType(_ type: UITextAutocorrectionType) {
+        textField?.autocorrectionType = type
+    }
 
     /// Get current text in unsecure format
     public func getText() -> String {
@@ -361,7 +367,7 @@ extension FloatingLabelTextField {
         var conainerViewWidth: CGFloat = 0
         var i = 0
         
-        // Creates buttons in loop and adds to the container
+        // Creates buttons in the loop and adds to the container
         while i < images.count {
             let spacing = (i != 0 ? imageSpacing : 0)
             let button = UIButton(frame: .zero)
@@ -452,9 +458,7 @@ extension FloatingLabelTextField: UITextFieldDelegate {
                     for ch in string.reversed() {
                         unsecureText.insert(ch, at: offsetToUpdate)
                     }
-                } else {
-                    unsecureText.insert(string.first!, at: offsetToUpdate)
-                }
+                } else { unsecureText.insert(string.first!, at: offsetToUpdate) }
             }
         }
         
@@ -478,7 +482,6 @@ extension FloatingLabelTextField: UITextFieldDelegate {
         
         // Notifies that text has been changed
         NotificationCenter.default.post(name: UITextField.textDidChangeNotification, object: textField)
-        
         return false
     }
     
