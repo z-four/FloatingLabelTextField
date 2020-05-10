@@ -11,24 +11,36 @@ import UIKit.UITextField
 // MARK: - Lifecycle
 @IBDesignable public class FloatingLabelTextField: UIView {
     
-    @IBInspectable public var separatorColor: UIColor? {
-        set { separatorView?.backgroundColor = newValue }
-        get { return UIColor.dividerColor }
+    private var storedSeparatorColor: UIColor = UIColor.dividerColor
+    @IBInspectable public var separatorColor: UIColor {
+        set {
+            separatorView?.backgroundColor = newValue
+            storedSeparatorColor = newValue
+        }
+        get { return storedSeparatorColor }
     }
     
+    private var storedHeaderColor: UIColor = UIColor.floatingLabelColor
     @IBInspectable public var headerColor: UIColor {
-        set { headerLabel?.textColor = newValue }
-        get { return UIColor.floatingLabelColor  }
+        set {
+            if let text = headerLabel?.getText() {
+                headerLabel?.setText(text: text, color: newValue)
+            }
+            storedHeaderColor = newValue
+        }
+        get { return storedHeaderColor }
     }
     
+    private var storedHeaderText: String? = .none
     @IBInspectable public var headerText: String?  {
         set {
-            headerLabel?.setText(text: newValue, color: .floatingLabelColor)
-            headerLabel?.letterSpace = Constants.Header.letterSpacing
+            headerLabel?.setText(text: newValue, color: headerColor)
+            storedHeaderText = newValue
         }
-        get { return headerLabel?.getText() }
+        get { return storedHeaderText }
     }
     
+    private var storedPlaceholderColor: UIColor = UIColor.placeholderColor
     @IBInspectable public var placeholderColor: UIColor {
         set {
             if let placeholder = placeholderText {
@@ -36,16 +48,44 @@ import UIKit.UITextField
                                                                       attributes: [.font : FontFamily.Gerbera.light.font(size: 15),
                                                                                    .foregroundColor: newValue])
             }
+            storedPlaceholderColor = newValue
         }
-        get { return UIColor.placeholderColor  }
+        get { return storedPlaceholderColor  }
     }
     
+    private var storedPlaceholderText: String? = .none
     @IBInspectable public var placeholderText: String? {
-        set { textField?.placeholder = newValue }
-        get { return textField?.placeholder }
+        set {
+            textField?.placeholder = newValue
+            storedPlaceholderText = newValue
+        }
+        get { return storedPlaceholderText }
     }
     
-    @IBInspectable var isSecure: Bool = false
+    private var storedTextColor: UIColor = UIColor.white
+    @IBInspectable public var textColor: UIColor {
+        set {
+            textField?.textColor = newValue
+            storedTextColor = newValue
+        }
+        get { return storedTextColor  }
+    }
+    
+    @IBInspectable public var isSecure: Bool = false
+    
+    public var text: String {
+        set {
+            if (textField != nil) {
+                // Refreshes secure text
+                refreshSecureText(newValue)
+                // Sets new text
+                setAttributedText(isSecure ? secureText : unsecureText)
+                // Handles new text
+                handleText(unsecureText)
+            }
+        }
+        get { return unsecureText}
+    }
     
     /// Delegate
     public weak var delegate: FloatingLabelTextFieldDelegate?
@@ -114,6 +154,7 @@ extension FloatingLabelTextField {
     private func createHeaderLabel() {
         // Init and add header as a subview
         headerLabel = AttributedLabel()
+        headerLabel?.setText(text: headerText, color: headerColor)
         headerLabel?.alpha = 0
         headerLabel?.font = FontFamily.Gerbera.light.font(size: Constants.Header.fontSize)
         headerLabel?.sizeToFit()
@@ -130,7 +171,7 @@ extension FloatingLabelTextField {
         textField = UITextField()
         textField?.delegate = self
         textField?.font = FontFamily.Gerbera.medium.font(size: Constants.TextField.fontSize)
-        textField?.textColor = UIColor.white
+        textField?.textColor = textColor
         textField?.rightViewMode = .always
         textField?.translatesAutoresizingMaskIntoConstraints =  false
         textField?.addTarget(self, action: #selector(textFieldDidChange(_:)),for: .editingChanged)
@@ -302,9 +343,6 @@ extension FloatingLabelTextField {
         }
     }
 
-    /// Returns current text state
-    public func isSecute() -> Bool { return isSecure }
-
     /// Sets keyboard type.
     /// - Parameter type: UIKeyboardType to be setted.
     public func setKeyboardType(_ type: UIKeyboardType) {
@@ -315,22 +353,6 @@ extension FloatingLabelTextField {
     /// - Parameter type: UITextAutocorrectionType to be setted.
     public func setAutocorrectionType(_ type: UITextAutocorrectionType) {
         textField?.autocorrectionType = type
-    }
-
-    /// Get current text in unsecure format
-    public func getText() -> String {
-        return unsecureText
-    }
-    
-    /// Updates current text with the new one.
-    /// - Parameter text: New text.
-    public func setText(_ text: String) {
-       // Refreshes secure text
-       refreshSecureText(text)
-       // Sets new text
-       setAttributedText(isSecure ? secureText : unsecureText)
-       // Handles new text
-       handleText(unsecureText)
     }
 }
 
