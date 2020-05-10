@@ -24,7 +24,7 @@ import UIKit.UITextField
     @IBInspectable public var headerText: String?  {
         set {
             headerLabel?.setText(text: newValue, color: .floatingLabelColor)
-            headerLabel?.letterSpace = -0.2
+            headerLabel?.letterSpace = Constants.Header.letterSpacing
         }
         get { return headerLabel?.getText() }
     }
@@ -69,11 +69,11 @@ import UIKit.UITextField
     internal lazy var stateViewWidth: CGFloat = 0
     
     /// Animation duration
-    private let animDuration: TimeInterval = 0.3
+    private let headerAnimDuration: TimeInterval = Constants.Header.animDuration
     
     /// Letter spacing
-    private lazy var secureTextLetterSpacing: CGFloat = 5
-    private lazy var unsecureTextLetterSpacing: CGFloat = -0.6
+    private lazy var secureTextLetterSpacing: CGFloat = Constants.TextField.secureLetterSpacing
+    private lazy var unsecureTextLetterSpacing: CGFloat = Constants.TextField.unsecureLetterSpacing
     
     /// Text
     private lazy var unsecureText = String()
@@ -95,11 +95,9 @@ import UIKit.UITextField
 // MARK: - Setup
 extension FloatingLabelTextField {
     
-    
     /// Basic configuration and view creation
     private func setUpView() {
         backgroundColor = .clear
-        
         
         // Registers all the library fonts
         UIFont.registerLibraryFonts()
@@ -118,7 +116,7 @@ extension FloatingLabelTextField {
         // Init and add header as a subview
         headerLabel = AttributedLabel()
         headerLabel?.alpha = 0
-        headerLabel?.font = FontFamily.Gerbera.light.font(size: 12)
+        headerLabel?.font = FontFamily.Gerbera.light.font(size: Constants.Header.fontSize)
         headerLabel?.sizeToFit()
         headerLabel?.translatesAutoresizingMaskIntoConstraints =  false
         addSubview(headerLabel!)
@@ -132,7 +130,7 @@ extension FloatingLabelTextField {
         // Init and add text field as a subview
         textField = UITextField()
         textField?.delegate = self
-        textField?.font = FontFamily.Gerbera.medium.font(size: 18)
+        textField?.font = FontFamily.Gerbera.medium.font(size: Constants.TextField.fontSize)
         textField?.textColor = UIColor.white
         textField?.rightViewMode = .always
         textField?.translatesAutoresizingMaskIntoConstraints =  false
@@ -173,7 +171,7 @@ extension FloatingLabelTextField {
         descriptionLabel = AttributedLabel()
         descriptionLabel?.sizeToFit()
         descriptionLabel?.textColor = .white
-        descriptionLabel?.font = FontFamily.Gerbera.medium.font(size: 10)
+        descriptionLabel?.font = FontFamily.Gerbera.medium.font(size: Constants.Description.fontSize)
         descriptionLabel?.translatesAutoresizingMaskIntoConstraints =  false
         addSubview(descriptionLabel!)
         
@@ -220,19 +218,21 @@ extension FloatingLabelTextField {
         headerLabelConstraintTop?.constant = value
         
         // Animate view with already changed constraint value
-        UIView.animateKeyframes(withDuration: animDuration, delay: 0, options: .calculationModeCubic, animations: {
+        UIView.animateKeyframes(withDuration: headerAnimDuration,
+                                delay: 0,
+                                options: .calculationModeCubic,
+                                animations: {
             
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: self.animDuration) {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: self.headerAnimDuration) {
                 headerLabel.frame = CGRect(x: 0, y: value, width: currFrame.width, height: currFrame.height)
             }
             
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: self.animDuration / 2) {
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: self.headerAnimDuration / 2) {
                 headerLabel.alpha = !self.isFloatingLabelShown ? 0 : 1
             }
             
         }, completion: nil)
     }
-    
     
     /// Sets new text and adjusts letter spacing.
     /// - Parameter text: New text.
@@ -248,7 +248,6 @@ extension FloatingLabelTextField {
         textField.attributedText = attributedString
     }
     
-    
     /// Refreshes current text.
     /// - Parameter text: New unsecure text.
     private func refreshSecureText(_ text: String) {
@@ -256,7 +255,7 @@ extension FloatingLabelTextField {
         // Refreshs secure text
         secureText.removeAll()
         // Fills string with secure chars
-        for _ in unsecureText {  secureText += "●" }
+        for _ in unsecureText {  secureText += Constants.secureChar }
     }
 }
 
@@ -335,7 +334,7 @@ extension FloatingLabelTextField {
         let button = UIButton(frame: CGRect(x: 0, y: 0,
                                             width: frame.height, height: frame.height))
         button.setTitle(text, for: .normal)
-        button.titleLabel?.font = FontFamily.Gerbera.light.font(size: 15)
+        button.titleLabel?.font = FontFamily.Gerbera.light.font(size: Constants.RightLabel.fontSize)
         button.setTitleColor(color, for: .normal)
         button.setTitleColor(color.darker(), for: .highlighted)
         button.sizeToFit()
@@ -349,16 +348,17 @@ extension FloatingLabelTextField {
     /// Add images to the right of the text field.
     /// - Parameters:
     ///   - images: Array of images.
-    public func addRightImages(_ images: [UIImage], spacing: CGFloat = 8) {
+    public func addRightImages(_ images: [UIImage], spacing: CGFloat? = nil) {
         let viewHeight: CGFloat = frame.height
         let containerView = UIView()
+        let imageSpacing = (spacing == nil ? Constants.RightImage.spacing : spacing!)
         var conainerViewWidth: CGFloat = 0
         var i = 0
         
         // Creates buttons in loop and adds to the container
         while i < images.count {
             let image = images[i]
-            let spacing = (i != 0 ? spacing : 0)
+            let spacing = (i != 0 ? imageSpacing : 0)
             let buttonX = (containerView.subviews.last?.frame.maxX ?? 0) + spacing
             let button = UIButton(frame: .zero)
             button.frame.origin.x = buttonX
@@ -380,7 +380,6 @@ extension FloatingLabelTextField {
         textField?.rightViewMode = .always
         textField?.rightView = containerView
     }
-    
     
     /// Handles click on extra view.
     /// - Parameter button: Button that has been clicked.
@@ -432,7 +431,7 @@ extension FloatingLabelTextField: UITextFieldDelegate {
         }
         
         // Fills string with secure chars
-        for _ in unsecureText {  secureText += "●" }
+        for _ in unsecureText {  secureText += Constants.secureChar }
         
         // Save secure text
         self.secureText = secureText
