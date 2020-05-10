@@ -36,7 +36,8 @@ extension UIFont {
         case light = "Gerbera-Light"
     }
     
-    convenience init<FontType: FontConvertible> (_ font: FontType, size: CGFloat) where FontType: RawRepresentable, FontType.RawValue == String {
+    convenience init<FontType: FontConvertible> (_ font: FontType,
+                                                 size: CGFloat) where FontType: RawRepresentable, FontType.RawValue == String {
         self.init(name: font.rawValue, size: size)!
     }
     
@@ -58,6 +59,9 @@ extension UIFont {
 
 extension UIFont {
     
+    
+    /// Loads font by name.
+    /// - Parameter name: Given font name.
     static func loadFont(name: String) {
         guard
             let fontURL = fontURL(for: name),
@@ -68,10 +72,13 @@ extension UIFont {
 
         var error: Unmanaged<CFError>?
         if !CTFontManagerRegisterGraphicsFont(font, &error) {
-            //can produce font already added error, skip handling
+            // Can produce font already added error, skip handling
         }
     }
     
+    /// Returns font url by passed font name.
+    /// - Parameter fontName: Font name.
+    /// - Returns: Url of the font.
     static func fontURL(for fontName: String) -> URL? {
         let bundle = Bundle(for: FloatingLabelTextField.self)
 
@@ -86,6 +93,8 @@ extension UIFont {
         return nil
     }
     
+    
+    /// Register all the library fonts
     static func registerLibraryFonts() {
         loadFont(name: Gerbera.black.rawValue)
         loadFont(name: Gerbera.bold.rawValue)
