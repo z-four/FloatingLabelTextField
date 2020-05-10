@@ -110,7 +110,9 @@ Also you can configure style via Interface Builder
 
 ## Requirements
 
-- CocoaPods 1.0.0+
+* iOS 9.0+
+* CocoaPods 1.0.0+
+* Swift 5
 
 ## Installation
 
