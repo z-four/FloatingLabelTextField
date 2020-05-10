@@ -13,7 +13,7 @@ import UIKit.UITextField
     
     @IBInspectable public var separatorColor: UIColor? {
         set { separatorView?.backgroundColor = newValue }
-        get { return UIColor.separatorColor }
+        get { return UIColor.dividerColor }
     }
     
     @IBInspectable public var headerColor: UIColor {

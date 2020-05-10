@@ -49,7 +49,7 @@ extension UIColor {
     
     ///Library colors
     open class var floatingLabelColor: UIColor { return UIColor(hex: "a6bac1") }
-    open class var separatorColor: UIColor { return UIColor.white.withAlphaComponent(0.2) }
+    open class var dividerColor: UIColor { return UIColor.white.withAlphaComponent(0.2) }
     open class var placeholderColor: UIColor { return UIColor.white.withAlphaComponent(0.5) }
     open class var cursorColor: UIColor { return UIColor(hex: "A6BAC1") }
 }
