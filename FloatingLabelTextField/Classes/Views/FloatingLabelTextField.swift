@@ -385,7 +385,6 @@ extension FloatingLabelTextField {
         button.addTarget(self, action: #selector(onRightViewClick(_:)), for: .touchDown)
         
         // Sets button as text field's right view
-        textField?.rightViewMode = .always
         textField?.rightView = button
     }
     
@@ -419,7 +418,6 @@ extension FloatingLabelTextField {
         containerView.frame = CGRect(x: 0, y: 0, width: conainerViewWidth, height: viewHeight)
         
         // Sets button as text field's right view
-        textField?.rightViewMode = .always
         textField?.rightView = containerView
     }
     
@@ -466,11 +464,13 @@ extension FloatingLabelTextField: UITextFieldDelegate {
         if let selectedTextIndexes = textField.selectedTextIndexes() {
             let startIndex = selectedTextIndexes.startIndex
             let endIndex = selectedTextIndexes.endIndex
-            let charsToRemove = unsecureText.distance(from: startIndex, to: endIndex)
-            let lastSelectedCharIndex = unsecureText.distance(from: unsecureText.startIndex, to: endIndex)
+            if let currentText = textField.text {
+                let charsToRemove = currentText.distance(from: startIndex, to: endIndex)
+                let lastSelectedCharIndex = currentText.distance(from: textField.text!.startIndex, to: endIndex)
             
-            // Determinate caret position after text has been cropped (shift pos by 1 if string isn't empty to keep caret ahead)
-            selectionPosition = lastSelectedCharIndex - charsToRemove + (string.isEmpty ? 0 : 1)
+                // Determinate caret position after text has been cropped (shift pos by 1 if string isn't empty to keep caret ahead)
+                selectionPosition = lastSelectedCharIndex - charsToRemove + (string.isEmpty ? 0 : 1)
+            }
             
             // Replaces selected range with emptiness
             unsecureText.replaceSubrange(startIndex..<endIndex, with: string)
@@ -500,6 +500,11 @@ extension FloatingLabelTextField: UITextFieldDelegate {
         // Save secure text
         self.secureText = secureText
         
+        // Hides caret if position has been changed
+        if selectionPosition != -1 {
+            textField.tintColor = .clear
+        }
+        
         // Update text with secure onte
         setAttributedText(secureText)
         
@@ -508,6 +513,7 @@ extension FloatingLabelTextField: UITextFieldDelegate {
                                                                            offset: selectionPosition) {
             textField.selectedTextRange = textField.textRange(from: caretPosition, to: caretPosition)
         }
+        textField.tintColor = selectionColor
         
         // Handle inputed text
         handleText(unsecureText)
